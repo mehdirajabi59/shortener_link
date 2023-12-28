@@ -1,6 +1,6 @@
 <?php
 
-namespace Mehdi\ShortenerLink\Entity;
+namespace Mehdi\Core\DB;
 
 class BaseEntity
 {

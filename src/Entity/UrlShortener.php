@@ -2,6 +2,8 @@
 
 namespace Mehdi\ShortenerLink\Entity;
 
+use Mehdi\Core\DB\BaseEntity;
+
 class UrlShortener extends BaseEntity
 {
     public int $id;

@@ -3,18 +3,19 @@
 namespace Mehdi\ShortenerLink\Domains\Link\Validators;
 
 use Mehdi\Core\DB\DB;
+use Mehdi\Core\Validator\ValidatorInterface;
 
 class ShortCodeExistsValidator implements ValidatorInterface
 {
-
-    public function passes($value): bool
+    private $value;
+    public function passes(): bool
     {
-        if (empty($value)) {
+        if (empty($this->value)) {
             return false;
         }
 
         $sth = DB::getConn()->prepare('SELECT id FROM `url_shortener` WHERE `short_code` = ?');
-        $sth->execute([$value]);
+        $sth->execute([$this->value]);
 
         return !! $sth->fetch();
     }
@@ -22,5 +23,10 @@ class ShortCodeExistsValidator implements ValidatorInterface
     public function message(): string
     {
         return 'Your Short Code Is Not Exists';
+    }
+
+    public function __construct($value)
+    {
+        $this->value = $value;
     }
 }
