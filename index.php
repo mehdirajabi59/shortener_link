@@ -1,57 +1,22 @@
 <?php
 
+use Mehdi\Core\Router;
+
 require __DIR__ .'/vendor/autoload.php';
 
-$pathInfo = rtrim($_SERVER['PATH_INFO'], '/');
-$splitPath = explode('/', $pathInfo);
-
 $routers = [
-    '/{link}' => [\Mehdi\ShortenerLink\Domains\Link\Controller\UrlConvertorController::class, 'convert'],
-    '/user/sign-in' => [\Mehdi\ShortenerLink\Domains\Authentication\Controller\LoginController::class, '__invoke']
+    Router::init(
+        path: '/{link}',controller: [\Mehdi\ShortenerLink\Domains\Link\Controller\UrlConvertorController::class, 'convert'],middlewares: [\Mehdi\ShortenerLink\Domains\Link\Middleware\TestMiddleware::class]
+    ),
+    Router::init(
+        path: '/user/sign-in',controller: [\Mehdi\ShortenerLink\Domains\Authentication\Controller\LoginController::class, '__invoke']
+    ),
 ];
 
+$application = new \Mehdi\Core\Application(
+    $routers,
+    rtrim($_SERVER['PATH_INFO'], '/')
+);
 
-foreach ($routers as $pattern => $controller) {
+$application->run();
 
-    $params = [];
-
-    $splitPattern = explode('/', $pattern);
-
-    if (count($splitPattern) === count($splitPath)) {
-        if (isRouteMatch($splitPath, $splitPattern)) {
-            $params = getParameters($splitPath, $splitPattern);
-
-            $controllerInstance = new $controller[0];
-            $res = call_user_func_array([$controllerInstance, $controller[1]], $params);
-
-            if ($res instanceof \Mehdi\Core\Response\Json) {
-                echo $res;
-            }
-        }
-    }
-
-}
-
-
-function getParameters($splitPath, $splitPattern) {
-    $params = [];
-    for ($i=0; $i < count($splitPath); $i++) {
-        if (preg_match('/^{.+}$/', $splitPattern[$i])) {
-            array_push($params, $splitPath[$i]);
-        }
-    }
-
-    return $params;
-}
-function isRouteMatch($splitPath, $splitPattern)
-{
-    for ($i=0; $i < count($splitPath); $i++) {
-        if (preg_match('/^\{.+\}$/', $splitPattern[$i])) {
-            continue;
-        }
-        if ($splitPath[$i] !== $splitPattern[$i]) {
-            return false;
-        }
-    }
-    return true;
-}
