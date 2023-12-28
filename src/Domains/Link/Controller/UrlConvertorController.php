@@ -18,7 +18,7 @@ class UrlConvertorController
     public function convert($path): ?Json
     {
         $validator = Validator::make([
-            new ShortCodeExistsValidator($path)
+            'short_code' => new ShortCodeExistsValidator($path)
         ]);
 
         if (! $validator->validate()) {

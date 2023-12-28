@@ -18,10 +18,10 @@ class Validator
 
     public function validate(): bool
     {
-        foreach ($this->classes as $class) {
+        foreach ($this->classes as $inputName => $class) {
             if ($class instanceof ValidatorInterface) {
                 if (! $class->passes()) {
-                    array_push($this->errorMessages, $class->message());
+                    array_push($this->errorMessages, $class->message($inputName));
                 }
             }
         }

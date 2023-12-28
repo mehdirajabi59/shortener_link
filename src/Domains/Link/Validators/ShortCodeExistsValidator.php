@@ -20,9 +20,9 @@ class ShortCodeExistsValidator implements ValidatorInterface
         return !! $sth->fetch();
     }
 
-    public function message(): string
+    public function message($name): string
     {
-        return 'Your Short Code Is Not Exists';
+        return "Your {$name} Is Not Exists";
     }
 
     public function __construct($value)
