@@ -23,7 +23,7 @@ class AuthenticateMiddleware implements MiddlewareInterface
 
         if (! str_starts_with($token, 'Bearer ')){
             return Response::json([
-                'message' => 'Your token is invalid3'
+                'message' => 'Your token is invalid'
             ], 401);
         }
         $token = str_replace('Bearer ', '', $token);
