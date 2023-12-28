@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  database:
+    image: mariadb:10.6.8
+    restart: always
+    networks:
+      - backend
+    env_file:
+      - ./env/mariadb.env
+    volumes:
+      - db:/var/lib/mysql:rw
+    ports:
+      - 4040:3306
+
+  shortener:
+    build: .
+    container_name: shortener_container
+    restart: always
+    ports:
+      - 8001:80
+    networks:
+      - backend
+    env_file:
+      - ./env/shortener.env
+    depends_on:
+      - database
+    working_dir: /var/www/html
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
+

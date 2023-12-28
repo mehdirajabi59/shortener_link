@@ -1,0 +1,1 @@
+docker exec shortener_container  php "/var/www/html/importDatabase.php"
