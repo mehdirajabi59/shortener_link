@@ -8,6 +8,6 @@ class Input
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        return array_merge($_POST, $data);
+        return array_merge($_POST, $data ?? []);
     }
 }

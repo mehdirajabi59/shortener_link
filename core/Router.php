@@ -7,12 +7,14 @@ class Router
     private string $path;
     private array $controller;
     private array $middlewares;
-    public static function init($path, $controller, $middlewares = []): self
+    private string $method;
+    public static function init($method, $path, $controller, $middlewares = []): self
     {
         $router = new self;
         $router->path = $path;
         $router->controller = $controller;
         $router->middlewares = $middlewares;
+        $router->method = $method;
 
         return $router;
     }
@@ -59,5 +61,10 @@ class Router
     public function getMiddlewares(): array
     {
         return $this->middlewares;
+    }
+
+    public function getMethod(): string
+    {
+        return strtolower($this->method);
     }
 }

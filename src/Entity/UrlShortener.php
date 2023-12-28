@@ -10,4 +10,5 @@ class UrlShortener extends BaseEntity
     public string $longUrl;
     public string $shortCode;
     public string $createdAt;
+    public int $userId;
 }

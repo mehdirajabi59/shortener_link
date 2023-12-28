@@ -24,9 +24,10 @@ class Application
 
             $params = [];
 
+            $methodName = strtolower($_SERVER['REQUEST_METHOD']);
             $splitPattern = explode('/', $routeInstance->getPath());
 
-            if (count($splitPattern) === count($this->splitCurrentPath)) {
+            if (count($splitPattern) === count($this->splitCurrentPath) && $methodName === $routeInstance->getMethod()) {
                 if ($routeInstance->isRouteMatch($this->splitCurrentPath, $splitPattern)) {
 
                     $middlewares = $routeInstance->getMiddlewares();
