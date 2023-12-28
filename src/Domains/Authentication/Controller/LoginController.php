@@ -41,7 +41,6 @@ class LoginController
             return Response::json([
                 'message' => [
                     'Your username or password is wrong',
-                    'password' => password_hash('123456', PASSWORD_BCRYPT)
                 ]
             ], 401);
         }

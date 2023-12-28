@@ -22,6 +22,7 @@ class UrlShortenerRepository implements IUrlShortenerRepository
             $sth->execute([$shortCode]);
 
             $this->increaseUsage($shortCode);
+            $conn->commit();
 
         }catch (\Exception){
             $conn->rollBack();

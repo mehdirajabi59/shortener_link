@@ -23,7 +23,9 @@ class LoginService
     {
         $user = $this->loginRepository->getUser($username);
 
-        $this->userId = $user->getId();
+        if (! $user->isEmpty()) {
+            $this->userId = $user->getId();
+        }
 
         return ! $user->isEmpty() && password_verify($password, $user->getPassword());
     }
