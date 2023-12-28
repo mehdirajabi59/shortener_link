@@ -13,6 +13,11 @@ return [
         '/user/sign-in',
         [\Mehdi\ShortenerLink\Domains\Authentication\Controller\LoginController::class, '__invoke']
     ),
+    Router::init(
+        'POST',
+        '/user/sign-up',
+        [\Mehdi\ShortenerLink\Domains\Authentication\Controller\RegisterController::class, '__invoke']
+    ),
     // Access below route with token
     Router::init(
         'POST',
