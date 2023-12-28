@@ -19,6 +19,6 @@ class Required implements ValidatorInterface
 
     public function message($name): string
     {
-        return sprintf('You Must Fill The %s', $name);
+        return sprintf('You must fill the %s', $name);
     }
 }

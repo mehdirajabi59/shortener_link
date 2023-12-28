@@ -21,7 +21,7 @@ class Validator
         foreach ($this->classes as $inputName => $class) {
             if ($class instanceof ValidatorInterface) {
                 if (! $class->passes()) {
-                    array_push($this->errorMessages, $class->message($inputName));
+                    array_push($this->errorMessages, [$inputName => $class->message($inputName)]);
                 }
             }
         }

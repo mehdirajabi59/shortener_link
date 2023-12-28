@@ -6,7 +6,8 @@ $pathInfo = rtrim($_SERVER['PATH_INFO'], '/');
 $splitPath = explode('/', $pathInfo);
 
 $routers = [
-    '/{link}' => [\Mehdi\ShortenerLink\Domains\Link\Controller\UrlConvertorController::class, 'convert']
+    '/{link}' => [\Mehdi\ShortenerLink\Domains\Link\Controller\UrlConvertorController::class, 'convert'],
+    '/user/sign-in' => [\Mehdi\ShortenerLink\Domains\Authentication\Controller\LoginController::class, '__invoke']
 ];
 
 

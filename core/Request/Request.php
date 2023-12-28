@@ -6,6 +6,7 @@ class Request
 {
     public static function input($name): string
     {
-        return $_POST[$name] ?? '';
+        $data = Input::getInputs();
+        return $data[$name] ?? '';
     }
 }
