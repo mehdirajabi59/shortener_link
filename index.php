@@ -8,7 +8,7 @@ $routers = [
     Router::init(
         'GET',
         '/{link}',
-        [\Mehdi\ShortenerLink\Domains\Link\Controller\UrlConvertorController::class, 'convert']
+        [\Mehdi\ShortenerLink\Domains\Link\Controller\Go2UrlController::class, 'go']
     ),
     Router::init(
         'POST',

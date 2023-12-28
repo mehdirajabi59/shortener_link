@@ -8,14 +8,14 @@ use Mehdi\Core\Validator\Validator;
 use Mehdi\ShortenerLink\Domains\Link\Services\ConvertService;
 use Mehdi\ShortenerLink\Domains\Link\Validators\ShortCodeExistsValidator;
 
-class UrlConvertorController
+class Go2UrlController
 {
     private ConvertService $convertService;
     function __construct()
     {
         $this->convertService = new ConvertService();
     }
-    public function convert($path): ?Json
+    public function go($path): ?Json
     {
         $validator = Validator::make([
             'short_code' => new ShortCodeExistsValidator($path)
