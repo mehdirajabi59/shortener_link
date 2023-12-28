@@ -9,4 +9,9 @@ class Request
         $data = Input::getInputs();
         return $data[$name] ?? '';
     }
+
+    public function header($name)
+    {
+        return $_SERVER[$name] ?? '';
+    }
 }
