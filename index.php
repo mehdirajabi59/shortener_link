@@ -21,7 +21,11 @@ foreach ($routers as $pattern => $controller) {
             $params = getParameters($splitPath, $splitPattern);
 
             $controllerInstance = new $controller[0];
-            call_user_func_array([$controllerInstance, $controller[1]], $params);
+            $res = call_user_func_array([$controllerInstance, $controller[1]], $params);
+
+            if ($res instanceof \Mehdi\Core\Response\Json) {
+                echo $res;
+            }
         }
     }
 

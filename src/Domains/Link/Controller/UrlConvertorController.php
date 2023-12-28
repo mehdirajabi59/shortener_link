@@ -2,7 +2,10 @@
 
 namespace Mehdi\ShortenerLink\Domains\Link\Controller;
 
+use Mehdi\Core\Response\Json;
+use Mehdi\Core\Response\Response;
 use Mehdi\ShortenerLink\Domains\Link\Services\ConvertService;
+use Mehdi\ShortenerLink\Domains\Link\Validators\ShortCodeExistsValidator;
 
 class UrlConvertorController
 {
@@ -11,11 +14,15 @@ class UrlConvertorController
     {
         $this->convertService = new ConvertService();
     }
-    public function convert($path): void
+    public function convert($path): ?Json
     {
-        echo $path . '<br>';
-        $path = 'url-short-test-aparat-active-link';
+        $shortCodeValidator = new ShortCodeExistsValidator;
+        if (! $shortCodeValidator->passes($path)) {
+            return Response::json([
+                'message' => $shortCodeValidator->message()
+            ], 422);
+        }
 
-        echo $this->convertService->convert($path);
+        $this->convertService->convert($path);
     }
 }

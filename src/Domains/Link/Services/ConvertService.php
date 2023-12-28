@@ -2,10 +2,23 @@
 
 namespace Mehdi\ShortenerLink\Domains\Link\Services;
 
+use Mehdi\ShortenerLink\Domains\Link\Repository\IUrlShortenerRepository;
+use Mehdi\ShortenerLink\Domains\Link\Repository\UrlShortenerRepository;
+
 class ConvertService
 {
-    public function convert($path) : string
+    private IUrlShortenerRepository $shortenerRepository;
+
+    public function __construct()
     {
-        return "ajf23e";
+        $this->shortenerRepository = new UrlShortenerRepository();
+    }
+
+    public function convert($shortCode) : void
+    {
+        $urlEntity = $this->shortenerRepository->show($shortCode);
+        $redirectUrl = $urlEntity->longUrl;
+
+        header("Location: {$redirectUrl}");
     }
 }

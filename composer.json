@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Mehdi\\ShortenerLink\\": "src/"
+            "Mehdi\\ShortenerLink\\": "src/",
+            "Mehdi\\Core\\": "core/"
         }
     },
     "authors": [
@@ -15,6 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "ext-pdo": "*"
     }
 }
