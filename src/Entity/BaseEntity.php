@@ -4,7 +4,7 @@ namespace Mehdi\ShortenerLink\Entity;
 
 class BaseEntity
 {
-    public function setAttributes(array $columns)
+    public function setAttributes(array $columns): void
     {
         foreach ($columns as $column => $value) {
             $columnCamel = $this->snakeToCamel($column);
